@@ -1,0 +1,219 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>WvWarlord User Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Layout: one reading column, numbered by the order a player meets things (Blish page, in-window Settings, panels, icon menu). */
+  :root {
+    --bg: #f4f6f4;
+    --fg: #1b2124;
+    --muted: #566067;
+    --rule: #d3d9d6;
+    --panel: #e8ece9;
+    --accent: #7d5d12;
+    --red: #c23b3b;
+    --green: #2f8a43;
+    --blue: #2b6fc4;
+    --gold: #b8860b;
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #13181b; --fg: #e3e8e6; --muted: #98a4a8; --rule: #2b3438; --panel: #1c2326;
+      --accent: #dcb461; --red: #e06060; --green: #5cc070; --blue: #5b9de8; --gold: #e0b84a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #13181b; --fg: #e3e8e6; --muted: #98a4a8; --rule: #2b3438; --panel: #1c2326;
+    --accent: #dcb461; --red: #e06060; --green: #5cc070; --blue: #5b9de8; --gold: #e0b84a;
+    color-scheme: dark;
+  }
+
+  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; margin: 0; }
+  .wrap { max-width: 760px; margin-inline: auto; padding-inline: 16px; padding-block: 40px 72px; }
+
+  header h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 7vw, 3.4rem); line-height: 1; letter-spacing: .01em; margin: 0 0 12px; text-transform: uppercase; text-wrap: balance; }
+  header p { margin: 0; color: var(--muted); max-width: 60ch; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 24px 0 0; padding: 14px 0; border-block: 1px solid var(--rule); font-size: .9rem; }
+  .toc a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--accent); }
+  .toc a:hover, .toc a:focus-visible { color: var(--accent); outline: none; }
+
+  section { margin-top: 48px; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 1.9rem; text-transform: uppercase; letter-spacing: .03em; margin: 0 0 4px; color: var(--accent); text-wrap: balance; }
+  h2 + .where { font-family: var(--mono); font-size: .8rem; color: var(--muted); margin: 0 0 16px; }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 1.3rem; letter-spacing: .03em; text-transform: uppercase; margin: 32px 0 6px; }
+  p { margin: 0 0 12px; max-width: 68ch; }
+  ul, ol { margin: 0 0 14px; padding-left: 1.2em; max-width: 68ch; }
+  li { margin-bottom: 5px; }
+  code, .k { font-family: var(--mono); font-size: .86em; background: var(--panel); padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+  strong { font-weight: 600; }
+
+  .tablewrap { overflow-x: auto; margin: 4px 0 16px; }
+  table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: .94rem; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--mono); font-weight: 500; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  td:first-child { white-space: nowrap; font-weight: 500; padding-right: 20px; }
+
+  .note { border-left: 3px solid var(--accent); background: var(--panel); padding: 10px 14px; margin: 14px 0; max-width: 68ch; font-size: .94rem; }
+  .note p { margin: 0; }
+
+  /* Mock of the Blish corner-icon menu */
+  .menu { font-family: var(--mono); font-size: .84rem; background: var(--panel); border: 1px solid var(--rule); width: min(100%, 300px); padding: 6px 0; margin: 8px 0 16px; }
+  .menu div { padding: 3px 14px; display: flex; gap: 8px; align-items: center; }
+  .menu .hd { color: var(--muted); }
+  .menu .sep { padding: 0 14px; color: var(--rule); letter-spacing: -1px; overflow: hidden; white-space: nowrap; }
+  .menu .sq { width: .8em; height: .8em; flex: none; display: inline-block; }
+  .sq.r { background: var(--red); } .sq.g { background: var(--green); } .sq.b { background: var(--blue); } .sq.y { background: var(--gold); }
+  .menurow { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+  .menurow > div { flex: 1 1 280px; min-width: 0; }
+
+  .tag { font-family: var(--mono); font-size: .75rem; padding: 1px 6px; border: 1px solid var(--rule); border-radius: 3px; color: var(--muted); white-space: nowrap; }
+  footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>WvWarlord User Guide</h1>
+    <p>A Blish HUD module that tracks World vs World objectives, waypoints and guild claims in one window. This guide follows the order you will meet things in: the Blish HUD page, the in-window Settings tab, each panel, then quick travel from the Blish icon.</p>
+    <nav class="toc" aria-label="Sections">
+      <a href="#blish">1. Blish HUD settings</a>
+      <a href="#settings">2. Module settings</a>
+      <a href="#panels">3. The panels</a>
+      <a href="#travel">4. Quick travel from the icon</a>
+    </nav>
+  </header>
+
+  <section id="blish">
+    <h2>1. Blish HUD settings</h2>
+    <p class="where">Blish HUD &rsaquo; Settings &rsaquo; Manage Modules &rsaquo; WvWarlord</p>
+    <p>This is the only page Blish HUD itself shows for the module. It holds the few things the module needs before it can run.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>Open WvWarlord Settings</td><td>Opens the WvWarlord window straight on its Settings tab (section 2).</td></tr>
+        <tr><td>GW2 API Access Key</td><td>Required. The module uses it to find your WvW team and match. Create the key at account.arena.net with at least the <strong>account</strong> and <strong>wvw</strong> permissions; add <strong>guilds</strong> if you want your guild tags and claims to show.</td></tr>
+        <tr><td>Reset to Defaults</td><td>Resets every setting except your API key.</td></tr>
+        <tr><td>Window Hotkey</td><td>Opens and closes the main window. Default <span class="k">Shift + B</span>.</td></tr>
+        <tr><td>Enable Dev Debug Window</td><td>Turns on a diagnostics window (API call counters, raw log). Leave off unless you are troubleshooting.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p>Until the key is accepted, the window shows <em>“Waiting on preload”</em> and the panels do not appear. Once the key works they build themselves automatically.</p></div>
+    <p>The <strong>WvWarlord icon</strong> on Blish HUD's top bar does two things. Left-click opens or closes the main window, which stays closed when Blish HUD starts. Right-click opens the quick-travel menu (section 4).</p>
+  </section>
+
+  <section id="settings">
+    <h2>2. Module settings</h2>
+    <p class="where">WvWarlord window &rsaquo; Settings tab (gear icon, bottom of the tab strip)</p>
+    <p>Everything else is set here. Each choice saves as you make it and is what the module loads with next time. Use <strong>Close</strong> at the bottom to go back.</p>
+
+    <h3>Tac Overview</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Option</th><th>Choices</th></tr></thead>
+      <tbody>
+        <tr><td>View</td><td>Single Map, All Map Grid, Detail Grid, Guild</td></tr>
+        <tr><td>Filter</td><td>All, My Color, Not My Color</td></tr>
+        <tr><td>Sort</td><td>Building Type, Player Distance</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Quick Travel</h3>
+    <p><strong>Filter</strong> controls which waypoint cards are listed: <em>My Map &amp; Color</em> (current map <em>or</em> your color), <em>My Color</em>, <em>My Map</em>, or <em>All</em>.</p>
+
+    <h3>Guild Claims</h3>
+    <p>No filters, only the panel toggles below.</p>
+
+    <h3>Panel toggles</h3>
+    <p>Tac Overview, Quick Travel and Guild Claims each have the same four checkboxes.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Toggle</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td>Enabled</td><td>Shows or hides the panel entirely.</td></tr>
+        <tr><td>Minimized</td><td>Collapses the panel to its title bar.</td></tr>
+        <tr><td>Popped Out</td><td>Detaches the panel into its own floating window.</td></tr>
+        <tr><td>Stay in Battle</td><td>Keeps the panel fully visible in combat. Without it the panel fades to 15% opacity while you fight.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p>Changes made directly on a panel (clicking its title bar to minimize, the pop-out icon, or the docked View and Filter dropdowns) apply to the current session only. Only the Settings tab changes what loads next time.</p></div>
+
+    <h3>Core Settings</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Option</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>ChatLink Handling</td><td>What happens when you click a card or a quick-travel entry. <strong>Clipboard Only</strong> (default) copies the link. <strong>Manual</strong> opens chat and pastes it. <strong>/d (Squad)</strong>, <strong>Shift+Enter /d</strong>, <strong>/p (Party)</strong> and <strong>/s (Say)</strong> open chat and paste it with that prefix. <strong>/w [username]</strong> whispers it to your own account. <strong>ScarMap</strong> sends it to the ScarMap module. The chat options only work while the game window is focused.</td></tr>
+        <tr><td>Auto-Send</td><td>Presses Enter after pasting, so the message goes out without a second key press.</td></tr>
+        <tr><td>ScarMap Filter</td><td>Which objectives Auto-Destination may pick: All Structures, Only Enemy (enemy-held or neutral), Only Friendly.</td></tr>
+        <tr><td>Auto-Destination</td><td>On by default. While you are on a WvW map and ScarMap is installed, WvWarlord sends the closest eligible objective to ScarMap and updates it as you move.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p>ScarMap is not part of this module. It is a separate Blish HUD module that must be installed on its own. WvWarlord only sends objectives to it.</p></div>
+  </section>
+
+  <section id="panels">
+    <h2>3. The panels</h2>
+    <p class="where">WvWarlord window</p>
+    <p>The left column holds Tac Overview controls, Quick Travel and Guild Claims, with a Status block pinned underneath. The right side shows the card grid for whichever tab is selected. Tabs, top to bottom: <span class="tag">None / Hide TAC</span> <span class="tag">Single Map</span> <span class="tag">All Maps Grid</span> <span class="tag">Detail Grid</span> <span class="tag">Guild</span> <span class="tag">Settings</span>.</p>
+    <p>Every panel has a title bar with a <strong>minimize</strong> icon and a <strong>pop-out</strong> icon; clicking the title also minimizes. A popped-out panel is a draggable window that remembers where you left it and closes back into the main window with its X. Popped-out panels hide when you are off a WvW map and the main window is closed.</p>
+
+    <h3>Tac Overview</h3>
+    <p>Two dropdowns (View, Filter) and four map buttons: <strong>EBG, Red, Green, Blue</strong>. The map buttons choose which map the grid shows. When you are not on a WvW map it defaults to your own team's borderland.</p>
+    <ul>
+      <li><strong>Single Map</strong> lists one map's objectives. <strong>All Maps Grid</strong> shows all four side by side, current map first. <strong>Detail Grid</strong> uses larger cards that add guild tactic slots, eight per column.</li>
+      <li><strong>Guild</strong> shows one row per guild that holds a claim, with four slots (EBG, Red, Green, Blue). This gives an idea of which guilds have been active recently.</li>
+    </ul>
+    <p><strong>Reading a card.</strong> The side stripe indicates which map the objective is on. The icon is tinted by who owns it now. The second line reads <span class="k">T2 | Yaks 4 | 12m</span> (tier, yaks delivered, time held), or <span class="k">Locked 03:12</span> in red for the first 5 minutes after a flip, or <span class="k">Neutral</span>. A guild tag appears after the name when the objective is claimed. With <strong>Player Distance</strong> sorting, a distance is appended and updates about twice a second while the list re-sorts every 15 seconds. Distances need Blish HUD's Mumble link to be connected.</p>
+    <p><strong>Clicking cards.</strong> Left-click sends the objective's chat link using your ChatLink Handling choice. Right-click gives a fixed menu that ignores that setting: <span class="k">Send to Chat</span> (/s), <span class="k">Send to Broadcast</span> (/d), <span class="k">Send to Clipboard</span>, <span class="k">Send to ScarMap</span>.</p>
+
+    <h3>Quick Travel</h3>
+    <p>The top strip is a tray of waypoint icons for each map. Hover for the name, click to send the link to the chat.</p>
+    <p>Below the tray is a list of every objective with a working waypoint right now, filtered by your Quick Travel Filter. Emergency waypoints are not shown here. Each card shows the name and how long it has been held.</p>
+
+    <h3>Guild Claims</h3>
+    <p>For each guild on your account that currently holds claims, a gold <span class="k">TAG Guild Name</span> header is followed by a card per claimed objective with its tier, e.g. <em>Name (T3)</em>.</p>
+
+    <h3>Status</h3>
+    <p>Pinned at the bottom of the left column: your account, team and color, match ID, and the time of the last update with seconds since the match data last changed. Data refreshes about every 15 seconds. The block's background turns redder the longer Guild Wars 2 is not providing updated data.</p>
+  </section>
+
+  <section id="travel">
+    <h2>4. Quick travel from the icon</h2>
+    <p class="where">Right-click the WvWarlord icon on Blish HUD's top bar</p>
+    <p>You can travel (send link to chat) without opening the window. The menu lists waypoints grouped by map, <strong>your home map first</strong>, then EBG, then the other two borderlands. Group headers are labels and cannot be clicked.</p>
+
+    <div class="menurow">
+      <div>
+        <div class="menu" role="img" aria-label="Example menu for a Blue team player">
+          <div class="hd">-- BLUE (HOME) --</div>
+          <div>Home Citadel</div>
+          <div>Garrison Keep</div>
+          <div class="sep">────────────</div>
+          <div class="hd">-- EBG --</div>
+          <div>Blue Spawn</div>
+          <div>Valley Keep</div>
+          <div class="sep">────────────</div>
+          <div class="hd">-- RED MAP --</div>
+          <div>Red Border</div>
+          <div class="sep">────────────</div>
+          <div class="hd">-- GREEN MAP --</div>
+          <div>Green Border</div>
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li><strong>Always shown:</strong> one waypoint per map. That is your Home Citadel on your own map, your spawn on EBG, and the border waypoint on the other two.</li>
+          <li><strong>Shown only while you hold it:</strong> your home Garrison keep on your own map and your team's EBG keep.</li>
+          <li><strong>Added automatically:</strong> any other keep on that map that your team owns at Tier 3 with a working waypoint, listed by name.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Clicking an entry <strong>does not teleport you</strong>. It sends that waypoint's chat link using your ChatLink Handling setting. With the default, <em>Clipboard Only</em>, the link is copied and you paste it into chat, then click it to travel. Set it to <em>/s</em>, <em>/p</em> or <em>/d</em> and the link is typed into chat for you, or to <em>Manual</em> to have chat opened with the link ready.</p>
+  </section>
+
+  <footer>Written from the WvWarlord source as uploaded. Behavior in a later build may differ.</footer>
+</div>
+
+</body></html>
