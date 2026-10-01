@@ -1,0 +1,30 @@
+{
+  "name": "WvWarlord",
+  "version": "1.3.10000",
+  "namespace": "knownas.wvwarlord",
+  "package": "WvWarlord.dll",
+  "manifest_version": 1,
+  "contributors": [
+      {
+          "name":     "Knownas",
+          "username": "Dadruff.1234"
+      },
+      {
+          "name":     "Gemini save some time waste some time, C+",
+          "url":      "http://google.com/"
+      },
+      {
+          "name":     "Claude, B-",
+          "url":      "http://claude.com/"
+      }
+  ],
+  "description": "A tactical overlay giving commanders instant access to WvW objectives Stati and chat-links.",
+    "dependencies": {
+    "bh.blishhud": ">=1.3.0"
+  },
+    "api_permissions": {
+        "account"     : { "optional": false,  "details": "Needed to get acccount\wvw" },
+        "characters"     : { "optional": true,  "details": "I'm not remembering atm" },
+        "guilds"     : { "optional": true,  "details": "Needed, eh, don't think this was really needed :)" }
+    }
+  }
