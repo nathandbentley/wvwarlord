@@ -1,0 +1,30 @@
+{
+  "name": "WvWarlord",
+  "version": "0.3.1",
+  "namespace": "knownas.wvwarlord",
+  "package": "WvWarlord.dll",
+  "manifest_version": 1,
+  "contributors": [
+      {
+          "name":     "Knownas",
+          "username": "Dadruff.1234"
+      },
+      {
+          "name":     "Gemini save some time waste some time, C",
+          "url":      "http://google.com/"
+      },
+      {
+          "name":     "Claude, guess you did adiquate, b-",
+          "url":      "http://claude.com/"
+      }
+  ],
+  "description": "A tactical overlay giving commanders instant access to WvW objectives Stati and chat-links.",
+    "dependencies": {
+    "bh.blishhud": ">=1.3.0"
+  },
+    "api_permissions": {
+        "account"     : { "optional": true,  "details": "Needed if you want the special feature enabled." },
+        "characters"     : { "optional": true,  "details": "Needed if you want the special feature enabled." },
+        "guilds"     : { "optional": true,  "details": "Needed if you want the special feature enabled." }
+    }
+  }
